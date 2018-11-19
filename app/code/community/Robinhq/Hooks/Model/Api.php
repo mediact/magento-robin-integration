@@ -91,10 +91,10 @@ class Robinhq_Hooks_Model_Api
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, (int) $config['api_connect_timeout']);
         }
 
-        if (!empty($config['api_connect'])
-            && is_numeric($config['api_connect'])
+        if (!empty($config['api_timeout'])
+            && is_numeric($config['api_timeout'])
         ) {
-            curl_setopt($ch, CURLOPT_TIMEOUT, (int) $config['api_connect']);
+            curl_setopt($ch, CURLOPT_TIMEOUT, (int) $config['api_timeout']);
         }
 
         return $ch;
