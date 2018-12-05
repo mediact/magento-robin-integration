@@ -47,9 +47,7 @@ class Robinhq_Hooks_Model_Robin_Customer
                         ->getStore()
                         ->getCurrentCurrencyCode(),
                 'phone_number' => $phoneNumber,
-                'reward_points' => $rewardPoints,
-                'latest_order_date' => Mage::getModel('core/date')
-                        ->date('Y-m-d', strtotime($latestOrder->getCreatedAt()))
+                'reward_points' => $rewardPoints
         ];
     }
 
@@ -88,23 +86,5 @@ class Robinhq_Hooks_Model_Robin_Customer
         }
 
         return $helper->formatPhoneNumber($billing->getTelephone(), $billing->getCountryId());
-    }
-
-    /**
-     * Get the latest order placed with customer's email
-     * @param Mage_Customer_Model_Customer $customer
-     * @return Mage_Sales_Model_Order|Varien_Object
-     */
-    protected function getLatestOrder(Mage_Customer_Model_Customer $customer)
-    {
-        /** @var Mage_Sales_Model_Resource_Order_Collection $collection */
-        $collection = Mage::getResourceModel('sales/order_collection');
-
-        $collection->addFieldToFilter('customer_email', $customer->getEmail())
-            ->addAttributeToSort('created_at', 'DESC')
-            ->setPageSize(1)
-            ->load();
-
-        return $collection->getFirstItem();
     }
 }
