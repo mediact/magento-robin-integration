@@ -22,7 +22,6 @@ class Robinhq_Hooks_Model_Robin_Customer
         $helper = Mage::helper('robinhq_hooks');
 
         $lifetime = $this->getLifeTimeSalesCustomer($customer);
-        $latestOrder = $this->getLatestOrder($customer);
 
         $formattedTotalSpent = Mage::helper('core')
                 ->currency($lifetime->getLifetime(), true, false);
